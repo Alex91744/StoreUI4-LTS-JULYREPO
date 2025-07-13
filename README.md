@@ -41,5 +41,5 @@ NULL
 - LG Wing dual-screen layout with virtual touchpad
 
 ## Coming features
-- Build in web browser
+- Build in web browser with vpn
 - accounts
