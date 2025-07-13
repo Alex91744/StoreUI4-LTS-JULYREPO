@@ -30,12 +30,12 @@ NULL
 - App data: APKPure integration
 - Responsive design for mobile, tablet, desktop
 - LG Wing dual-screen optimization
-- Theme system (dark/light mode)
+- Theme system (dark/light mode) - REMOVED
 
 ## Features
 - Horizontal scrolling hot apps section
-- Compact search bar next to logo
+- Compact search bar next to logo - REMOVED
 - Real APKPure download links
-- Dark/light theme toggle
+- Dark/light theme toggle - REMOVED
 - Mobile-optimized navigation
 - LG Wing dual-screen layout with virtual touchpad
