@@ -518,6 +518,9 @@ class AcueStore {
                             <div class="info-item">
                                 <span class="info-label">Build:</span>
                                 <span class="info-value">S6000Y25MJD8SU04</span>
+
+class="info-label">Build type:</span>
+                                <span class="info-value">LTS</span>
                             </div>
                         </div>
                         <p>Acue Store provides safe and verified APK downloads from APKPure. All apps are scanned for security before being made available.</p>
