@@ -286,8 +286,8 @@ class AcueStore {
         if (filteredApps.length === 0) {
             searchResults.innerHTML = `
                 <div class="no-results">
-                    <h3>No Results</h3>
-                    <p>Try a different search term</p>
+                    <h3>No Results found</h3>
+                    <p>App does not exist</p>
                 </div>
             `;
         } else {
