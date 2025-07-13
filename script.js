@@ -519,7 +519,6 @@ class AcueStore {
                                 <span class="info-label">Build:</span>
                                 <span class="info-value">S6000Y25MJD8SU04</span>
 
-class="info-label">Build type:</span>
                                 <span class="info-value">LTS</span>
                             </div>
                         </div>
