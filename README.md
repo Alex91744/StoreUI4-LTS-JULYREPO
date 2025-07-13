@@ -39,3 +39,7 @@ NULL
 - Dark/light theme toggle - REMOVED
 - Mobile-optimized navigation
 - LG Wing dual-screen layout with virtual touchpad
+
+#up coming features
+- Build in web browser
+- accounts
