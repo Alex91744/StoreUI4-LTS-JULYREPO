@@ -4,7 +4,7 @@
 NULL
 
 ## Recent Changes
-- 2025-07-13: Fixed bugs and removed LG wing support for a while
+- 2025-07-13: Fixed bugs / removed LG wing support for a while / fixed dates
 - 2025-07-08: Added performance optimizations for older devices (Samsung S7 Edge and similar)
 - 2025-07-08: Moved Diogo Jota tribute section to appear right after Categories section
 - 2025-07-06: Fixed navigation menu button line at bottom bug
