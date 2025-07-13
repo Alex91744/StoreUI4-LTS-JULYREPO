@@ -40,6 +40,6 @@ NULL
 - Mobile-optimized navigation
 - LG Wing dual-screen layout with virtual touchpad
 
-#up coming features
+## Coming features
 - Build in web browser
 - accounts
