@@ -758,20 +758,100 @@ const categories = {
     music: { name: 'Music', icon: 'fas fa-music' }
 };
 
-// Export for use in other files
-window.appsData = appsData;
-window.categories = categories;
-
-    // Badge definitions
-window.badgeTypes = {
-    "data-sharing": {
-        icon: "🌐",
-        name: "Data sharing app",
-        reason: "The following app is giving and sharing data with servers (unsecured)."
-    },
-    "unstable": {
-        icon: "⚠️",
-        name: "Unstable App",
-        reason: "App is unstable or may not work at all."
-    }
+// Admin configuration
+const adminConfig = {
+    adminIP: '84.67.186.183',
+    isAdmin: false,
+    adminUser: 'AlzzTech',
+    primaryPin: '291210',
+    securityPin: '505',
+    securityQuestion: 'Addy 7?',
+    securityAnswer: '613 Cranbrook Road'
 };
+
+// Export for use in other files
+if (typeof window !== 'undefined') {
+    // Browser environment
+    window.appsData = appsData;
+    window.categories = categories;
+    window.adminConfig = adminConfig;
+    window.badgeTypes = {
+        "data-sharing": {
+            icon: "🌐",
+            name: "Data Sharing",
+            reason: "This app shares data with third-party servers."
+        },
+        "unstable": {
+            icon: "⚠️",
+            name: "Unstable",
+            reason: "App may be unstable or contain bugs."
+        },
+        "editors-choice": {
+            icon: "⭐",
+            name: "Editor's Choice",
+            reason: "Selected by our editorial team for quality and innovation."
+        },
+        "featured": {
+            icon: "🔥",
+            name: "Featured",
+            reason: "Featured app with special promotion."
+        },
+        "trending": {
+            icon: "📈",
+            name: "Trending",
+            reason: "Currently trending and popular among users."
+        },
+        "new": {
+            icon: "🆕",
+            name: "New",
+            reason: "Recently added to the store."
+        },
+        "popular": {
+            icon: "👑",
+            name: "Popular",
+            reason: "Highly rated and widely downloaded."
+        }
+    };
+} else {
+    // Node.js environment
+    global.appsData = appsData;
+    global.categories = categories;
+    global.adminConfig = adminConfig;
+    global.badgeTypes = {
+        "data-sharing": {
+            icon: "🌐",
+            name: "Data Sharing",
+            reason: "This app shares data with third-party servers."
+        },
+        "unstable": {
+            icon: "⚠️",
+            name: "Unstable",
+            reason: "App may be unstable or contain bugs."
+        },
+        "editors-choice": {
+            icon: "⭐",
+            name: "Editor's Choice",
+            reason: "Selected by our editorial team for quality and innovation."
+        },
+        "featured": {
+            icon: "🔥",
+            name: "Featured",
+            reason: "Featured app with special promotion."
+        },
+        "trending": {
+            icon: "📈",
+            name: "Trending",
+            reason: "Currently trending and popular among users."
+        },
+        "new": {
+            icon: "🆕",
+            name: "New",
+            reason: "Recently added to the store."
+        },
+        "popular": {
+            icon: "👑",
+            name: "Popular",
+            reason: "Highly rated and widely downloaded."
+        }
+    };
+}
