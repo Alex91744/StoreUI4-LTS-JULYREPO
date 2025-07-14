@@ -697,10 +697,15 @@ body {
     cursor: pointer;
     border-bottom: 1px solid var(--glass-border);
     transition: all 0.3s ease;
+    min-height: 56px;
 }
 
 .menu-item:hover {
     background: var(--glass-bg-light);
+    border-radius: 8px;
+    margin: 0 -8px;
+    padding-left: 24px;
+    padding-right: 24px;
 }
 
 .menu-item:last-child {
@@ -711,17 +716,29 @@ body {
     font-size: 20px;
     color: var(--accent-color);
     width: 24px;
+    flex-shrink: 0;
 }
 
 .menu-item span {
     flex: 1;
     font-size: 16px;
     color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
 }
 
 .menu-item i:last-child {
     font-size: 14px;
     color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.menu-items {
+    padding: 0 20px 20px;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 /* Badge Modal */
@@ -817,6 +834,104 @@ body {
     border: 1px solid var(--glass-border);
 }
 
+/* Authentication Forms */
+.auth-form {
+    padding: 20px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.auth-form h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    background: var(--glass-bg-light);
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.form-group input::placeholder {
+    color: var(--text-muted);
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--gradient-secondary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 16px;
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(74, 144, 226, 0.3);
+}
+
+.auth-switch {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.auth-switch a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+.logout-section {
+    padding: 20px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--error-color);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
 /* Store Info */
 .store-info-content {
     text-align: left;
@@ -858,6 +973,848 @@ body {
     padding: 4px 8px;
     border-radius: 6px;
     border: 1px solid var(--glass-border);
+}
+
+
+
+.browser-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    font-size: 16px;
+    border-radius: 0 0 16px 16px;
+}
+
+.browser-loading i {
+    margin-right: 8px;
+    animation: spin 1s linear infinite;
+}
+
+.browser-error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: var(--glass-bg);
+    color: var(--text-secondary);
+    text-align: center;
+    border-radius: 0 0 16px 16px;
+}
+
+.browser-error i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: var(--error-color);
+}
+
+.browser-error h3 {
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.browser-error p {
+    font-size: 14px;
+}
+
+/* Settings Modal */
+.settings-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.settings-modal.show {
+    display: flex;
+}
+
+.settings-section {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.settings-section:last-child {
+    border-bottom: none;
+}
+
+.settings-section h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.setting-item label {
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.setting-btn {
+    background: var(--gradient-secondary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.setting-btn:hover {
+    transform: translateY(-2px);
+}
+
+.background-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.background-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.background-option:hover {
+    border-color: var(--accent-color);
+}
+
+.background-option.active {
+    border-color: var(--accent-color);
+    background: var(--glass-bg-light);
+}
+
+.bg-preview {
+    width: 60px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+}
+
+.bg-default {
+    background: var(--gradient-primary);
+}
+
+.bg-black {
+    background: #000000;
+}
+
+.bg-white {
+    background: #ffffff;
+}
+
+.bg-purple {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg-blue {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg-green {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+.background-option span {
+    font-size: 12px;
+    color: var(--text-primary);
+}
+
+/* Admin Panel */
+.admin-modal,
+.admin-auth-modal,
+.edit-app-modal,
+.badge-management-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.admin-modal.show,
+.admin-auth-modal.show,
+.edit-app-modal.show,
+.badge-management-modal.show {
+    display: flex;
+}
+
+.admin-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.admin-tab {
+    background: var(--glass-bg-light);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.admin-tab.active {
+    background: var(--accent-color);
+    color: white;
+}
+
+.admin-section {
+    display: none;
+}
+
+.admin-section.active {
+    display: block;
+}
+
+.admin-section h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.add-app-form {
+    background: var(--glass-bg-light);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 24px;
+}
+
+.add-app-form h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.add-app-form input,
+.add-app-form textarea,
+.add-app-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    margin-bottom: 12px;
+    outline: none;
+}
+
+.add-app-form input:focus,
+.add-app-form textarea:focus,
+.add-app-form select:focus {
+    border-color: var(--accent-color);
+}
+
+.add-app-form textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.admin-btn {
+    background: var(--gradient-secondary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 8px;
+}
+
+.admin-btn:hover {
+    transform: translateY(-2px);
+}
+
+.admin-btn.danger {
+    background: var(--error-color);
+}
+
+.admin-btn.danger:hover {
+    background: #c0392b;
+}
+
+/* Admin Authentication Modal */
+.auth-step {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.auth-step.active {
+    display: block;
+}
+
+.auth-step h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.auth-step p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.pin-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.pin-input-group input {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.pin-input-group input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.1);
+}
+
+.auth-btn {
+    background: var(--gradient-secondary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+}
+
+.auth-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Badge and Rating Forms */
+.badge-form,
+.rating-form {
+    background: var(--glass-bg-light);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 24px;
+}
+
+.badge-form h5,
+.rating-form h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.badge-form select,
+.badge-form input,
+.rating-form select,
+.rating-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    margin-bottom: 12px;
+    outline: none;
+}
+
+.badge-form select:focus,
+.badge-form input:focus,
+.rating-form select:focus,
+.rating-form input:focus {
+    border-color: var(--accent-color);
+}
+
+.badges-list,
+.ratings-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.badge-item,
+.rating-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: var(--glass-bg-light);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.badge-info,
+.rating-info {
+    flex: 1;
+}
+
+.users-list,
+.apps-management-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.user-item,
+.app-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: var(--glass-bg-light);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.user-info,
+.app-info {
+    flex: 1;
+}
+
+.user-info h5,
+.app-info h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.user-info p,
+.app-info p {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.user-actions,
+.app-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.user-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.user-status.active {
+    background: var(--success-color);
+    color: white;
+}
+
+.user-status.banned {
+    background: var(--error-color);
+    color: white;
+}
+
+/* App Management Styles */
+.app-management-item {
+    background: var(--glass-bg-light);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.app-management-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.app-management-header:hover {
+    background: var(--glass-bg);
+}
+
+.app-management-header.expanded {
+    background: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.app-icon-admin {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--gradient-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    font-size: 20px;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.app-management-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.app-management-info h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.app-management-info p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.app-status {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.status-indicator {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.status-indicator.online {
+    background: rgba(46, 204, 113, 0.2);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+.status-indicator.offline {
+    background: rgba(231, 76, 60, 0.2);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}
+
+.rating-display {
+    font-size: 12px;
+    color: var(--warning-color);
+    font-weight: 600;
+}
+
+.app-badges-admin {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.admin-badge {
+    background: var(--gradient-secondary);
+    color: var(--text-primary);
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--glass-border);
+}
+
+.app-management-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.admin-btn-small {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.admin-btn-small:hover {
+    background: var(--accent-color);
+    transform: scale(1.05);
+}
+
+.admin-btn-small.danger {
+    background: var(--error-color);
+    color: white;
+}
+
+.admin-btn-small.danger:hover {
+    background: #c0392b;
+}
+
+.app-details-expandable {
+    padding: 16px;
+    background: var(--glass-bg);
+    border-top: 1px solid var(--glass-border);
+}
+
+.app-detail-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.app-detail-row strong {
+    min-width: 120px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.download-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    word-break: break-all;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.download-link:hover {
+    text-decoration: underline;
+}
+
+/* Edit App Modal */
+.edit-form {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.edit-form .form-group {
+    margin-bottom: 16px;
+}
+
+.edit-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus,
+.edit-form select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.edit-form textarea {
+    height: 80px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.edit-form input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--glass-border);
+}
+
+/* Badge Management */
+.badge-management {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.badge-management h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.available-badges {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.badge-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--glass-bg);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.badge-option:hover {
+    border-color: var(--accent-color);
+    background: var(--glass-bg-light);
+}
+
+.badge-option.selected {
+    border-color: var(--accent-color);
+    background: rgba(74, 144, 226, 0.1);
+}
+
+.badge-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.badge-name {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.badge-option input[type="checkbox"] {
+    margin: 0;
+    pointer-events: none;
+}
+
+.current-badges {
+    background: var(--glass-bg-light);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 24px;
+}
+
+.current-badges-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 32px;
+}
+
+.current-badge {
+    background: var(--gradient-secondary);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid var(--glass-border);
+}
+
+/* Background Themes */
+body.bg-black {
+    background: #000000 !important;
+}
+
+body.bg-white {
+    background: #ffffff !important;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+}
+
+body.bg-purple {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+body.bg-blue {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+}
+
+body.bg-green {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%) !important;
 }
 
 /* Loading States */
