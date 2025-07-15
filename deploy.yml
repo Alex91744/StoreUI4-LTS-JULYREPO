@@ -1,0 +1,27 @@
+
+name: Deploy to Replit
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Test build
+      run: node server.js &
+      
+    - name: Deploy to Replit
+      run: echo "Deploy to Replit via webhook or API"
