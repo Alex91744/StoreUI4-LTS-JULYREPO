@@ -1,5 +1,4 @@
 const express = require('express');
-const { Pool } = require('pg');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const fs = require('fs');
@@ -8,11 +7,67 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// PostgreSQL connection
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-});
+let pool;
+let isPostgreSQL = true;
+
+// Try PostgreSQL first, fallback to SQLite
+async function setupDatabase() {
+  try {
+    if (process.env.DATABASE_URL) {
+      const { Pool } = require('pg');
+      pool = new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+      });
+      
+      // Test the connection
+      await pool.query('SELECT 1');
+      console.log('Connected to PostgreSQL database');
+      isPostgreSQL = true;
+    } else {
+      throw new Error('No DATABASE_URL found');
+    }
+  } catch (error) {
+    console.log('PostgreSQL connection failed, falling back to SQLite:', error.message);
+    
+    try {
+      const sqlite3 = require('sqlite3').verbose();
+      const { open } = require('sqlite');
+      
+      pool = await open({
+        filename: './database.sqlite',
+        driver: sqlite3.Database
+      });
+      
+      console.log('Connected to SQLite database');
+      isPostgreSQL = false;
+    } catch (sqliteError) {
+      console.log('SQLite also failed, using JSON storage:', sqliteError.message);
+      pool = null;
+      isPostgreSQL = false;
+    }
+  }
+}
+
+// Unified database query method
+async function dbQuery(sql, params = []) {
+  if (!pool) {
+    throw new Error('No database connection available');
+  }
+  
+  if (isPostgreSQL) {
+    const result = await pool.query(sql, params);
+    return result.rows;
+  } else {
+    // SQLite - convert PostgreSQL syntax
+    let sqliteSql = sql.replace(/\$(\d+)/g, '?');
+    sqliteSql = sqliteSql.replace(/SERIAL PRIMARY KEY/g, 'INTEGER PRIMARY KEY AUTOINCREMENT');
+    sqliteSql = sqliteSql.replace(/CURRENT_TIMESTAMP/g, "datetime('now')");
+    
+    const result = await pool.all(sqliteSql, params);
+    return result;
+  }
+}
 
 // Middleware
 app.use(express.json());
@@ -37,8 +92,8 @@ app.post('/api/register', async (req, res) => {
     }
     
     // Check if user exists
-    const existingUser = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
-    if (existingUser.rows.length > 0) {
+    const existingUser = await dbQuery('SELECT * FROM users WHERE username = $1', [username]);
+    if (existingUser.length > 0) {
       return res.status(400).json({ error: 'Username already exists' });
     }
     
@@ -46,7 +101,7 @@ app.post('/api/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     
     // Create user
-    const result = await pool.query(
+    const result = await dbQuery(
       'INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING id, username, email, created_at',
       [username, hashedPassword, email || `${username}@acuestore.com`]
     );
@@ -329,8 +384,30 @@ async function initializeApps(forceReload = false) {
   }
 }
 
+// Initialize database schema
+async function initializeDatabase() {
+  try {
+    const fs = require('fs');
+    const schemaSQL = fs.readFileSync('./database.sql', 'utf8');
+    
+    // Split and execute each statement
+    const statements = schemaSQL.split(';').filter(stmt => stmt.trim().length > 0);
+    
+    for (const statement of statements) {
+      await pool.query(statement);
+    }
+    
+    console.log('Database schema initialized successfully');
+  } catch (error) {
+    console.error('Database initialization error:', error);
+    // Don't crash the server if DB init fails
+  }
+}
+
 // Start server
 app.listen(port, '0.0.0.0', async () => {
   console.log(`Server running on port ${port}`);
+  await setupDatabase();
+  await initializeDatabase();
   await initializeApps();
 });
