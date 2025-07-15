@@ -2,7 +2,7 @@
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS apps (
 
 -- App badges table
 CREATE TABLE IF NOT EXISTS app_badges (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     app_id VARCHAR(255) NOT NULL,
     badge_type VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS app_badges (
 
 -- Admin settings table
 CREATE TABLE IF NOT EXISTS admin_settings (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     setting_key VARCHAR(255) UNIQUE NOT NULL,
     setting_value TEXT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
