@@ -1,27 +1,54 @@
-
-name: Deploy to Replit
+name: Deploy and Test Server
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: acuetest
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-    - uses: actions/checkout@v3
-    
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18'
-        
+
     - name: Install dependencies
       run: npm install
-      
-    - name: Test build
-      run: node server.js &
-      
-    - name: Deploy to Replit
-      run: echo "Deploy to Replit via webhook or API"
+
+    - name: Set environment variables
+      run: |
+        echo "DATABASE_URL=postgres://postgres:postgres@localhost:5432/acuetest" >> $GITHUB_ENV
+
+    - name: Run database init script
+      run: |
+        psql -h localhost -U postgres -d acuetest -f database.sql
+      env:
+        PGPASSWORD: postgres
+
+    - name: Start server
+      run: |
+        node server.js &
+        sleep 5
+
+    - name: Ping server
+      run: curl http://localhost:5000 || exit 1
